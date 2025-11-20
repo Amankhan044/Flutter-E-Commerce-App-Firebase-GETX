@@ -21,6 +21,7 @@ dependencies:
   smooth_page_indicator: ^1.2.1
   get: ^4.7.2
   iconsax: ^0.0.8
+  carousel_slider: ^5.1.1
 
 dev_dependencies:
   flutter_test:
@@ -42,6 +43,10 @@ flutter:
     - assets/logo/
     - assets/images/
     - assets/animations/
+    - assets/banners/
+    - assets/products/
+    - assets/brands/
+    - assets/icons/categories/
 
  
 

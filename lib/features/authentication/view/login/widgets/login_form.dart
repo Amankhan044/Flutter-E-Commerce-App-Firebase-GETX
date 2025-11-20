@@ -3,6 +3,7 @@ import 'package:e_commerce/features/authentication/view/forget_password/forget_p
 import 'package:e_commerce/features/authentication/view/signup/signup_view.dart';
 import 'package:e_commerce/utils/constants/sizes.dart';
 import 'package:e_commerce/utils/constants/text.dart';
+import 'package:e_commerce/navigation_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -49,7 +50,7 @@ class ULoginForm extends StatelessWidget {
           
           Column(
             children: [
-            UElevatedButton(onPressed: (){}, child: Text(UTexts.signIn))
+            UElevatedButton(onPressed: ()=> Get.to(()=> NavigationMenu()), child: Text(UTexts.signIn))
           ]),
             const SizedBox(height: USizes.spaceBtwItems/2),
 

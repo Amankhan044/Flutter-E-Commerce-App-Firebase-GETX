@@ -2,10 +2,12 @@ import 'package:e_commerce/common/style/padding.dart';
 import 'package:e_commerce/common/widgets/button/elevated_button.dart';
 import 'package:e_commerce/common/widgets/button/social_buttons.dart';
 import 'package:e_commerce/common/widgets/login_signup/form_divider.dart';
+import 'package:e_commerce/features/authentication/view/signup/verify_email.dart';
 import 'package:e_commerce/features/authentication/view/signup/widgets/signup_form.dart';
 import 'package:e_commerce/utils/constants/sizes.dart';
 import 'package:e_commerce/utils/constants/text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
@@ -32,7 +34,9 @@ class SignUpView extends StatelessWidget {
                 const SizedBox(height: USizes.spaceBtwSections),
         
                 UElevatedButton(
-                  onPressed: () {},
+                  onPressed: (){
+                    Get.to(()=> VerifyEmailView());
+                  },
                   child: Text(UTexts.createAccount),
                 ),
         
