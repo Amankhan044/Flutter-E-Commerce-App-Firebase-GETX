@@ -19,7 +19,7 @@ class USearchBar extends StatelessWidget {
       left: USizes.spaceBtwSections,
       right: USizes.spaceBtwSections,
       child: Container(
-        height: USizes.searchBarHeight,
+        height: USizes.searchBarHeight-2,
         padding: EdgeInsets.symmetric(horizontal: USizes.md),
         decoration: BoxDecoration(
           color: dark ? UColors.dark : UColors.light,

@@ -9,12 +9,18 @@ import '../../common_shapes/rounded_container.dart';
 import '../text/brand_title_with_verify_icon.dart';
 
 class UBrandCard extends StatelessWidget {
-  const UBrandCard({super.key});
+  const UBrandCard({super.key,  this.showBorder=true, this.width});
+
+  final bool showBorder;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
+    
     return URoundedContainer(
-      showBorder: true,
+      height: USizes.brandCardHeight,
+      width: width,
+      showBorder: showBorder,
       padding: EdgeInsets.all(USizes.sm),
       backgroundColor: Colors.transparent,
       child: Row(

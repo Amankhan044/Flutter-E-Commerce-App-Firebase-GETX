@@ -16,7 +16,7 @@ class URoundedContainer extends StatelessWidget {
     this.borderColor = UColors.borderPrimary,
     this.backgroundColor = UColors.white,
     this.padding,
-    this.margin
+    this.margin, 
   });
 
   final double? width, height;
