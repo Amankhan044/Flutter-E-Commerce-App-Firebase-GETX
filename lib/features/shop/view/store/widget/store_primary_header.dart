@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../common/common_shapes/primary_header_container.dart';
-import '../../../../../../common/widgets/appbar/appbar.dart';
-import '../../../../../../common/widgets/products/cart/cart_counter_icon.dart';
-import '../../../../../../common/widgets/textfields/search_bar.dart';
-import '../../../../../../utils/constants/colors.dart';
-import '../../../../../../utils/constants/sizes.dart';
+import '../../../../../common/common_shapes/primary_header_container.dart';
+import '../../../../../common/widgets/appbar/appbar.dart';
+import '../../../../../common/widgets/products/cart/cart_counter_icon.dart';
+import '../../../../../common/widgets/textfields/search_bar.dart';
+import '../../../../../utils/constants/colors.dart';
+import '../../../../../utils/constants/sizes.dart';
 
 class UStorePrimaryHeader extends StatelessWidget {
   const UStorePrimaryHeader({

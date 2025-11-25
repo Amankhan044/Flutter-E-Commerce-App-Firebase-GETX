@@ -4,9 +4,12 @@ import 'package:e_commerce/common/widgets/images/rounded_image.dart';
 import 'package:e_commerce/common/widgets/text/brand_title_with_verify_icon.dart';
 import 'package:e_commerce/common/widgets/text/product_price_text.dart';
 import 'package:e_commerce/common/widgets/text/product_title_text.dart';
+import 'package:e_commerce/features/product_details/view/product_detail_view.dart';
 import 'package:e_commerce/utils/constants/images.dart';
 import 'package:e_commerce/utils/helpers/helpers_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../utils/constants/colors.dart';
@@ -20,9 +23,7 @@ class UProductCardVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = UHelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () {
-        
-      },
+      onTap: () => Get.to(()=> ProductDetailView()),
       child: Container(
               width: 180,
       
@@ -41,7 +42,7 @@ class UProductCardVertical extends StatelessWidget {
               backgroundColor: dark ? UColors.dark : UColors.light,
               child: Stack(
                 children: [
-                  const URoundedImage(imageUrl: UImages.productImage15),
+                  Center(child: const URoundedImage(imageUrl: UImages.productImage15)),
       
                   Positioned(
                     top: 12.0,

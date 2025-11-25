@@ -1,7 +1,7 @@
-import 'package:e_commerce/features/authentication/view/login/login_view.dart';
-import 'package:e_commerce/features/authentication/view/signup/signup_view.dart';
+import 'package:e_commerce/features/personalization/view/profile/profile_view.dart';
 import 'package:e_commerce/features/shop/view/home/home_view.dart';
-import 'package:e_commerce/features/shop/view/home/store/store_view.dart';
+import 'package:e_commerce/features/shop/view/store/store_view.dart';
+import 'package:e_commerce/features/shop/view/wishlist/wishlist_view.dart';
 import 'package:e_commerce/utils/constants/colors.dart';
 import 'package:e_commerce/utils/helpers/helpers_functions.dart';
 import 'package:flutter/material.dart';
@@ -44,9 +44,9 @@ class NavigationMenu extends StatelessWidget {
 }
 
 class NaviagtionController extends GetxController{
-
+    static NaviagtionController instance = Get.find();
     RxInt currentIndex = 0.obs;
 
-    List<Widget> screens = [HomeView(),StoreView(),SignUpView(),LoginView()];
+    List<Widget> screens = [HomeView(),StoreView(),WishlistView(),ProfileView()];
 
 }

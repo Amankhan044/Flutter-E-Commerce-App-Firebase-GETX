@@ -1,25 +1,16 @@
-import 'package:e_commerce/common/common_shapes/rounded_container.dart';
-import 'package:e_commerce/common/widgets/layouts/grid_layout.dart';
-import 'package:e_commerce/common/widgets/products/product_card/product_card_vertical.dart';
 import 'package:e_commerce/common/widgets/text/section_heading.dart';
-import 'package:e_commerce/features/shop/view/home/store/widget/category_tab.dart';
-import 'package:e_commerce/features/shop/view/home/store/widget/store_primary_header.dart';
-import 'package:e_commerce/utils/helpers/device_helpers.dart';
+import 'package:e_commerce/features/shop/view/store/widget/category_tab.dart';
+import 'package:e_commerce/features/shop/view/store/widget/store_primary_header.dart';
 import 'package:flutter/material.dart';
-import '../../../../../common/widgets/appbar/tabbar.dart';
-import '../../../../../common/widgets/brands/brand_card.dart';
-import '../../../../../common/widgets/brands/brand_showcase.dart';
-import '../../../../../utils/constants/colors.dart';
-import '../../../../../utils/constants/images.dart';
-import '../../../../../utils/constants/sizes.dart';
-import '../../../../../utils/helpers/helpers_functions.dart';
+import '../../../../common/widgets/appbar/tabbar.dart';
+import '../../../../common/widgets/brands/brand_card.dart';
+import '../../../../utils/constants/sizes.dart';
 
 class StoreView extends StatelessWidget {
   const StoreView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final dark = UHelperFunctions.isDarkMode(context);
     return DefaultTabController(
       length: 5,
       child: NestedScrollView(
