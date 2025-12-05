@@ -2,6 +2,7 @@ import 'package:e_commerce/common/common_shapes/primary_header_container.dart';
 import 'package:e_commerce/common/widgets/layouts/grid_layout.dart';
 import 'package:e_commerce/common/widgets/text/section_heading.dart';
 import 'package:e_commerce/common/widgets/textfields/search_bar.dart';
+import 'package:e_commerce/features/shop/view/all_products/all_products.dart';
 import 'package:e_commerce/features/shop/view/home/widget/home_appbar.dart';
 import 'package:e_commerce/features/shop/view/home/widget/home_categories.dart';
 import 'package:e_commerce/features/shop/view/home/widget/promo_slider.dart';
@@ -48,9 +49,7 @@ class HomeView extends StatelessWidget {
                 children: [
                   UPromoSlider(banners: [UImages.homeBanner1, UImages.homeBanner2, UImages.homeBanner3, UImages.homeBanner4, UImages.homeBanner5]),
                   SizedBox(height: USizes.spaceBtwSections),
-                  USectionHeading(title: 'Popular Products', onPressed: () {
-                    
-                  },),
+                  USectionHeading(title: 'Popular Products', onPressed: () => Get.to(()=>AllProductsView()),),
                   SizedBox(height: USizes.spaceBtwItems),
         
                   UGridLayout(itemCount: 6, itemBuilder: (context, index) {

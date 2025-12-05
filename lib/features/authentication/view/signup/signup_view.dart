@@ -2,8 +2,8 @@ import 'package:e_commerce/common/style/padding.dart';
 import 'package:e_commerce/common/widgets/button/elevated_button.dart';
 import 'package:e_commerce/common/widgets/button/social_buttons.dart';
 import 'package:e_commerce/common/widgets/login_signup/form_divider.dart';
-import 'package:e_commerce/features/authentication/view/signup/verify_email.dart';
 import 'package:e_commerce/features/authentication/view/signup/widgets/signup_form.dart';
+import 'package:e_commerce/features/authentication/viewmodel/signup/signup_viewmodel.dart';
 import 'package:e_commerce/utils/constants/sizes.dart';
 import 'package:e_commerce/utils/constants/text.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +14,7 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SignupViewmodel());
     return Scaffold(
       appBar: AppBar(),
       body: Center(
@@ -35,7 +36,7 @@ class SignUpView extends StatelessWidget {
         
                 UElevatedButton(
                   onPressed: (){
-                    Get.to(()=> VerifyEmailView());
+                    controller.registerUser();
                   },
                   child: Text(UTexts.createAccount),
                 ),

@@ -1,6 +1,7 @@
 import 'package:e_commerce/features/authentication/view/login/login_view.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class OnBoardingViewmodel extends GetxController{
 
@@ -9,6 +10,7 @@ class OnBoardingViewmodel extends GetxController{
   final pageController= PageController();
 
   RxInt currentIndex=0.obs;
+  final storage = GetStorage();
 
 
 
@@ -28,7 +30,7 @@ class OnBoardingViewmodel extends GetxController{
   void nextPage(){
 
     if(currentIndex.value==2){
-      
+      storage.write('isFirstTime', false);
       Get.offAll(()=>LoginView());
       return;}
     currentIndex.value++;

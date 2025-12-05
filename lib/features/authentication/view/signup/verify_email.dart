@@ -1,7 +1,7 @@
-import 'package:e_commerce/common/screens/success/success_screen.dart';
 import 'package:e_commerce/common/style/padding.dart';
 import 'package:e_commerce/common/widgets/button/elevated_button.dart';
-import 'package:e_commerce/features/authentication/view/login/login_view.dart';
+import 'package:e_commerce/data/repository/authentication_repository.dart';
+import 'package:e_commerce/features/authentication/viewmodel/signup/verify_email_viewmodel.dart';
 import 'package:e_commerce/utils/constants/images.dart';
 import 'package:e_commerce/utils/constants/sizes.dart';
 import 'package:e_commerce/utils/constants/text.dart';
@@ -10,16 +10,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class VerifyEmailView extends StatelessWidget {
-  const VerifyEmailView({super.key});
-
+  const VerifyEmailView({super.key, this.email,});
+   final String? email;
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(VerifyEmailViewmodel());
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            onPressed: () => Get.to(() => LoginView()),
+            onPressed: AuthenticationRepository.instance.logout ,
             icon: const Icon(Icons.close),
           ),
         ],
@@ -42,7 +43,7 @@ class VerifyEmailView extends StatelessWidget {
             SizedBox(height: USizes.spaceBtwItems / 2),
 
             Text(
-              'amankhan06a@gmail.com',
+             email?? '',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
 
@@ -54,21 +55,14 @@ class VerifyEmailView extends StatelessWidget {
             ),
             SizedBox(height: USizes.spaceBtwSections),
             UElevatedButton(
-              onPressed: () => Get.to(
-                () => SuccessScreenView(
-                  onTap: () {},
-                  image: UImages.accountCreatedImage,
-                  title: UTexts.accountCreatedTitle,
-                  subTitle: UTexts.accountCreatedSubTitle,
-                ),
-              ),
+              onPressed: () => controller.checkEmailVerificationStatus(),
               child: Text(UTexts.uContinue),
             ),
 
             SizedBox(
               width: double.infinity,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () => controller.sendEmailVerification(),
                 child: Text(UTexts.resendEmail),
               ),
             ),

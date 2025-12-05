@@ -1,9 +1,12 @@
 import 'package:e_commerce/common/widgets/image_text/vertical_image_text.dart';
+import 'package:e_commerce/features/shop/view/sub_category/sub_category_view.dart';
 import 'package:e_commerce/utils/constants/colors.dart';
 import 'package:e_commerce/utils/constants/images.dart';
 import 'package:e_commerce/utils/constants/sizes.dart';
 import 'package:e_commerce/utils/constants/text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 
 class UHomeCategories extends StatelessWidget {
   const UHomeCategories({super.key});
@@ -33,6 +36,7 @@ class UHomeCategories extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return UVerticalImageText(
+                  onTap:()=> Get.to(()=> SubCategoryView()),
                   image: UImages.sportsIcon,
                   title: 'Sports Categories',
                   color: UColors.white,

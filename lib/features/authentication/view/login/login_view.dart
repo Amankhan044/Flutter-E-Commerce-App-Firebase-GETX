@@ -6,12 +6,16 @@ import 'package:e_commerce/features/authentication/view/login/widgets/login_head
 import 'package:e_commerce/utils/constants/sizes.dart';
 import 'package:e_commerce/utils/constants/text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../viewmodel/login/login_viewmodel.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Get.put(LoginViewmodel());
 
     return Scaffold(
       appBar: AppBar(),

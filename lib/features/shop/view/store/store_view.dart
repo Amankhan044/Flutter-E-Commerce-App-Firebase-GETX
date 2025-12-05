@@ -1,7 +1,9 @@
 import 'package:e_commerce/common/widgets/text/section_heading.dart';
+import 'package:e_commerce/features/shop/view/brand/all_brands.dart';
 import 'package:e_commerce/features/shop/view/store/widget/category_tab.dart';
 import 'package:e_commerce/features/shop/view/store/widget/store_primary_header.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../common/widgets/appbar/tabbar.dart';
 import '../../../../common/widgets/brands/brand_card.dart';
 import '../../../../utils/constants/sizes.dart';
@@ -33,7 +35,7 @@ class StoreView extends StatelessWidget {
                       child: Column(
                         children: [
                           SizedBox(height: USizes.spaceBtwItems),
-                          USectionHeading(title: 'Brands', onPressed: () {}),
+                          USectionHeading(title: 'Brands', onPressed: () => Get.to(()=> AllBrandsView())),
 
                           SizedBox(height: USizes.spaceBtwItems),
                           SizedBox(
