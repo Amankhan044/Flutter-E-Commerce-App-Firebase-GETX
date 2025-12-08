@@ -47,6 +47,8 @@ class NaviagtionController extends GetxController{
     static NaviagtionController instance = Get.find();
     RxInt currentIndex = 0.obs;
 
+    
+
     List<Widget> screens = [HomeView(),StoreView(),WishlistView(),ProfileView()];
 
 }

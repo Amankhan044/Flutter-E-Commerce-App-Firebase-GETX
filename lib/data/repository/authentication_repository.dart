@@ -1,3 +1,4 @@
+import 'package:e_commerce/data/repository/user/user_repository.dart';
 import 'package:e_commerce/features/authentication/view/onboarding/onboarding_view.dart';
 import 'package:e_commerce/navigation_menu.dart';
 import 'package:e_commerce/utils/exceptions/firebase_auth_exceptions.dart';
@@ -21,6 +22,8 @@ class AuthenticationRepository  extends GetxController{
 
     final localStorage= GetStorage();
     final _auth = FirebaseAuth.instance;
+
+    User? get currentUser => _auth.currentUser;
 
     @override
   void onReady() {
@@ -206,6 +209,55 @@ class AuthenticationRepository  extends GetxController{
     throw 'Something went wrong, Please try again';
   }
 }
+
+ Future<void> deleteAccount()async{
+     try {
+
+      await UserRepository.instance.removeUserRecord(currentUser!.uid);
+      await currentUser?.delete();
+
+      
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
+    }on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    }
+    
+     catch(e){
+      throw 'Something went wrong, Please try again';
+    }
+  }
+
+
+  Future<void> reAutheticateWithEmailAndPassword(String email, String password)async{
+
+    try {
+      AuthCredential credential = EmailAuthProvider.credential(email: email, password: password);
+      await currentUser?.reauthenticateWithCredential(credential);
+
+    
+      
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
+    }on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    }
+    
+     catch(e){
+      throw 'Something went wrong, Please try again';
+    }
+
+  }
+
+
 
 
 }

@@ -3,16 +3,21 @@ import 'package:e_commerce/common/widgets/appbar/appbar.dart';
 import 'package:e_commerce/common/widgets/icons/circular_icon.dart';
 import 'package:e_commerce/common/widgets/images/user_profile_logo.dart';
 import 'package:e_commerce/common/widgets/text/section_heading.dart';
+import 'package:e_commerce/features/personalization/view/change_name/change_name_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../utils/constants/sizes.dart';
+import '../../view_model/user/user_viewmodel.dart';
 
 class EditProfileView extends StatelessWidget {
   const EditProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserViewmodel.instance;
+
     return Scaffold(
       appBar: UAppBar(
         showBackArrow: true,
@@ -45,8 +50,8 @@ class EditProfileView extends StatelessWidget {
               USectionHeading(title: 'Account Settings',showActionButton: false,),
               SizedBox(height: USizes.spaceBtwItems,),
 
-              UserDetailRow(title: 'Name', value: 'Aman Khan',onTap: (){},),
-              UserDetailRow(title: 'UserName', value: 'AmanKhan044',onTap: (){},),
+              UserDetailRow(title: 'Name', value: controller.user.value.fullName ,onTap: ()=> Get.to(() => const ChangeNameView()),),
+              UserDetailRow(title: 'UserName', value: controller.user.value.username ,onTap: (){},),
 
                  SizedBox(height: USizes.spaceBtwItems,),
               Divider(),
@@ -57,17 +62,15 @@ class EditProfileView extends StatelessWidget {
               SizedBox(height: USizes.spaceBtwItems,),
 
 
-               UserDetailRow(title: 'User ID', value: '132345',onTap: (){},),
-              UserDetailRow(title: 'Email', value: 'AmanKhan044@gmail.com',onTap: (){},),
-               UserDetailRow(title: 'Phone Number', value: '+92 3132446759',onTap: (){},),
+               UserDetailRow(title: 'User ID', value: controller.user.value.id ,onTap: (){},),
+              UserDetailRow(title: 'Email', value: controller.user.value.email,onTap: (){},),
+               UserDetailRow(title: 'Phone Number', value: '+92 ${controller.user.value.phoneNumber}',onTap: (){},),
                UserDetailRow(title: 'Gender', value: 'Male',onTap: (){},),
 
                 Divider(),
                  SizedBox(height: USizes.spaceBtwItems,),
 
-                 TextButton(onPressed: () {
-                   
-                 }, child: Text('Close Account', style: TextStyle(color: Colors.red),))
+                 TextButton(onPressed: controller.deleteAccountWarningPopup, child: Text('Close Account', style: TextStyle(color: Colors.red),))
 
 
               

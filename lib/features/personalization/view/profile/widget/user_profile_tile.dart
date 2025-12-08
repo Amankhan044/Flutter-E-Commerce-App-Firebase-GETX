@@ -1,4 +1,6 @@
 import 'package:e_commerce/features/personalization/view/edit_profile/edit_profile_view.dart';
+import 'package:e_commerce/features/personalization/view_model/user/user_viewmodel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,15 +11,20 @@ class UserProfileTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserViewmodel.instance;
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      title: Text(
-        'Profile',
-        style: Theme.of(context).textTheme.headlineSmall,
+      title: Obx(
+        () =>  Text(
+          controller.user.value.fullName,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
       ),
-      subtitle: Text(
-        'Amankhan06a@gmail.com',
-        style: Theme.of(context).textTheme.bodyMedium,
+      subtitle: Obx(
+        () =>  Text(
+          controller.user.value.email,
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
       ),
       trailing: IconButton(
         onPressed: () => Get.to(() => const EditProfileView()),
