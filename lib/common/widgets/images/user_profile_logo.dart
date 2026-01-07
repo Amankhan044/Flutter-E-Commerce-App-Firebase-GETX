@@ -1,5 +1,6 @@
 import 'package:e_commerce/common/widgets/images/circular_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../features/personalization/view_model/user/user_viewmodel.dart';
 import '../../../utils/constants/images.dart';
@@ -12,9 +13,11 @@ class UserProfileLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = UserViewmodel.instance;
+
+    return Obx(() {
     final bool isProfileAvailable = controller.user.value.profilePicture.isNotEmpty;
 
-    return UCircularImage(
+      return UCircularImage(
       image: isProfileAvailable? controller.user.value.profilePicture: UImages.profileLogo,
       width: 120,
       height: 120,
@@ -23,6 +26,7 @@ class UserProfileLogo extends StatelessWidget {
       showBorder: true,
       isNetworkImage:isProfileAvailable? true : false,
     );
+    },);
   }
 }
 

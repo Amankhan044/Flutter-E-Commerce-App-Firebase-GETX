@@ -1,6 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crypto/crypto.dart';
 import 'package:e_commerce/data/repository/authentication_repository.dart';
 import 'package:e_commerce/features/authentication/model/user_model.dart';
+import 'package:e_commerce/utils/constants/apis.dart';
+import 'package:e_commerce/utils/constants/keys.dart';
 import 'package:e_commerce/utils/exceptions/format_exceptions.dart'
     show UFormatException;
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,6 +16,7 @@ import 'package:get/get.dart';
 import '../../../utils/exceptions/firebase_auth_exceptions.dart';
 import '../../../utils/exceptions/firebase_exceptions.dart';
 import '../../../utils/exceptions/platform_exceptions.dart';
+import 'package:dio/dio.dart' as dio;
 
 class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
@@ -91,6 +98,56 @@ class UserRepository extends GetxController {
       throw UPlatformException(e.code).message;
     } catch (e) {
       throw 'Something went wrong, Please try again';
+    }
+  }
+
+
+  Future<dio.Response> uploadImage(File image)async{
+    try {
+
+       String api = UApiUrls.uploadApi(UKeys.cloudName);
+
+      dio.FormData formData =dio.FormData.fromMap({
+        'file':await  dio.MultipartFile.fromFile(
+        image.path,
+        filename: image.path.split('/').last,
+      ),
+      'folder':UKeys.profileFolder,
+      'upload_preset': UKeys.uploadPreset,});
+
+      dio.Response response=await dio.Dio().post(api, data:formData);
+
+      return response;
+      
+    } catch (e) {
+
+      throw 'Failed to upload picture! Please try again';
+    }
+  }
+
+  Future<dio.Response> deleteProfilePicture(String publicId)async{
+    try {
+      String api = UApiUrls.deleteApi(UKeys.cloudName);
+
+      int timestamp = (DateTime.now().millisecondsSinceEpoch/1000).round();
+      String signatureBase = 'public_id=$publicId&timestamp=$timestamp&api_key=${UKeys.apiSecret}';
+      String signature = sha1.convert(utf8.encode(signatureBase)).toString();
+
+       dio.FormData formData =dio.FormData.fromMap({
+        'public_id': publicId,
+      'api_key':UKeys.apiKey,
+      'timestamp':timestamp ,
+      'signature' :signature
+      });
+
+     dio.Response response=await dio.Dio().post(api, data:formData);
+
+     return response;
+      
+    } catch (e) {
+
+      throw 'something went wrong!. please try again';
+      
     }
   }
 }

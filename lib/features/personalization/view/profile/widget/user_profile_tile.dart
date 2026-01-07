@@ -1,6 +1,5 @@
 import 'package:e_commerce/features/personalization/view/edit_profile/edit_profile_view.dart';
 import 'package:e_commerce/features/personalization/view_model/user/user_viewmodel.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:e_commerce/data/repository/authentication_repository.dart';
 import 'package:e_commerce/features/personalization/view/change_name/re_authenticate_user_form.dart';
 import 'package:e_commerce/utils/constants/sizes.dart';
@@ -6,11 +8,13 @@ import 'package:e_commerce/utils/popups/snackbar_helpers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../data/repository/user/user_repository.dart';
 import '../../../../utils/helpers/network_manager.dart';
 import '../../../authentication/model/user_model.dart';
 import '../../../authentication/view/login/login_view.dart';
+import 'package:dio/dio.dart' as dio;
 
 class UserViewmodel extends GetxController {
   static UserViewmodel get instance => Get.find();
@@ -38,7 +42,11 @@ class UserViewmodel extends GetxController {
 
   Future<void> saveUserRecord(UserCredential userCredential) async {
     try {
-      final namePart = UserModel.nameParts(userCredential.user!.displayName);
+
+        await fetchUserRecord();
+
+        if(user.value.id.isEmpty){
+          final namePart = UserModel.nameParts(userCredential.user!.displayName);
       final username = '${userCredential.user!.displayName}1234';
       UserModel userModel = UserModel(
         id: userCredential.user!.uid,
@@ -50,6 +58,9 @@ class UserViewmodel extends GetxController {
         profilePicture: userCredential.user!.photoURL ?? '',
       );
       await _userRepository.saveUserRecord(userModel);
+        }
+
+      
     } catch (e) {
       USnackBarHelpers.warningSnackBar(
         title: 'Data Not Saved',
@@ -161,5 +172,49 @@ void deleteAccountWarningPopup(){
         
       }
     }
+
+
+
+
+Future<void> updateUserProfilePicture()async{
+  try {
+    final XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (image == null) return;
+
+    File file = File(image.path);
+
+    if (user.value.publicId.isNotEmpty) {
+     await _userRepository.deleteProfilePicture(user.value.publicId);
+      
+    }
+
+   dio.Response response = await _userRepository.uploadImage(file);
+
+   if(response.statusCode==200){
+
+    final data = response.data;
+
+    final imageUrl = data['url'];
+    final publicId = data['public_id'];
+
+    await _userRepository.updateSingleRecord( {'profilePicture': imageUrl, 'publicId': publicId});
+
+    user.value.profilePicture = imageUrl;
+    user.value.publicId = publicId;
+
+    user.refresh();
+
+    USnackBarHelpers.successSnackBar(title: 'Congratulations', message: 'Profile Picture updated successfully');
+
+   }else{
+    throw 'Failed to upload profile picture. Please try again';
+   }
+
+  } catch (e) {
+    USnackBarHelpers.errorSnackBar(title: 'Failed', message: e.toString());
+    
+  }
+}
 
 }

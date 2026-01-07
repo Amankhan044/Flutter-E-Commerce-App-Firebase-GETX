@@ -1,5 +1,6 @@
 import 'package:e_commerce/data/repository/user/user_repository.dart';
 import 'package:e_commerce/features/authentication/view/onboarding/onboarding_view.dart';
+import 'package:e_commerce/features/personalization/view_model/user/user_viewmodel.dart';
 import 'package:e_commerce/navigation_menu.dart';
 import 'package:e_commerce/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:e_commerce/utils/exceptions/platform_exceptions.dart';
@@ -214,6 +215,10 @@ class AuthenticationRepository  extends GetxController{
      try {
 
       await UserRepository.instance.removeUserRecord(currentUser!.uid);
+      if (UserViewmodel.instance.user.value.publicId.isNotEmpty) {
+        UserRepository.instance.deleteProfilePicture(UserViewmodel.instance.user.value.publicId);
+        
+      }
       await currentUser?.delete();
 
       

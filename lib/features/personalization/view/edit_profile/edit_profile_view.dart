@@ -39,7 +39,9 @@ class EditProfileView extends StatelessWidget {
                     bottom: 0,
                     left: 0,
                     right: 0,
-                    child: Center(child: UCircularIcon(icon: Iconsax.edit)))
+                    child: Center(child: UCircularIcon(icon: Iconsax.edit, onPressed: () {
+                      controller.updateUserProfilePicture();
+                    },)))
                 ],
               ),
 
