@@ -2,6 +2,7 @@ import 'package:e_commerce/common/widgets/text/section_heading.dart';
 import 'package:e_commerce/features/shop/view/brand/all_brands.dart';
 import 'package:e_commerce/features/shop/view/store/widget/category_tab.dart';
 import 'package:e_commerce/features/shop/view/store/widget/store_primary_header.dart';
+import 'package:e_commerce/features/shop/viewModel/category/category_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../common/widgets/appbar/tabbar.dart';
@@ -13,8 +14,10 @@ class StoreView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = CategoryViewModel.instance;
+
     return DefaultTabController(
-      length: 5,
+      length: controller.featuredCategories.length,
       child: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
@@ -62,15 +65,8 @@ class StoreView extends StatelessWidget {
           ];
         },
         body: TabBarView(
-          children: [
-            UCategoryTab(),
-            UCategoryTab(),
-            UCategoryTab(),
-            UCategoryTab(),
-            UCategoryTab(),
-
-          ],
-        ),
+          children:controller.featuredCategories.map((category) => UCategoryTab()).toList(),),
+        
       ),
     );
   }

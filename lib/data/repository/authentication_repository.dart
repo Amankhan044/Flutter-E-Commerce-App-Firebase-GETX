@@ -1,7 +1,9 @@
+import 'package:e_commerce/data/repository/category/category_repository.dart';
 import 'package:e_commerce/data/repository/user/user_repository.dart';
 import 'package:e_commerce/features/authentication/view/onboarding/onboarding_view.dart';
 import 'package:e_commerce/features/personalization/view_model/user/user_viewmodel.dart';
 import 'package:e_commerce/navigation_menu.dart';
+import 'package:e_commerce/utils/dummy_data.dart';
 import 'package:e_commerce/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:e_commerce/utils/exceptions/platform_exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -31,6 +33,7 @@ class AuthenticationRepository  extends GetxController{
 
     FlutterNativeSplash.remove();
     screenRedirect();
+    // Get.put(CategoryRepository()).uploadCategories(UDummyData.categories);
 
   }
 

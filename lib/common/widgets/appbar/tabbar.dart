@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../features/shop/viewModel/category/category_view_model.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/helpers/device_helpers.dart';
 import '../../../utils/helpers/helpers_functions.dart';
@@ -12,6 +13,8 @@ class UTabBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final dark = UHelperFunctions.isDarkMode(context);
+    final controller = CategoryViewModel.instance;
+
     return Material(
       color: dark ? UColors.black : UColors.white,
       child: TabBar(
@@ -19,14 +22,7 @@ class UTabBar extends StatelessWidget implements PreferredSizeWidget {
         indicatorColor:  UColors.primary,
         labelColor: dark ? UColors.white : UColors.primary,
         unselectedLabelColor: UColors.darkGrey,
-        tabs: const [
-            
-        Tab(child: Text('Sports'),),
-        Tab(child: Text('Furniture'),),
-        Tab(child: Text('Electronics'),),
-        Tab(child: Text('Clothes'),),
-        Tab(child: Text('Cosmetics'),),
-      ]),
+        tabs: controller.featuredCategories.map((category) => Tab(text: category.name)).toList(),),
     );
   }
   

@@ -1,3 +1,4 @@
+import 'package:e_commerce/common/widgets/images/circular_image.dart';
 import 'package:e_commerce/utils/constants/colors.dart';
 import 'package:e_commerce/utils/constants/sizes.dart';
 import 'package:e_commerce/utils/helpers/helpers_functions.dart';
@@ -27,16 +28,12 @@ class UVerticalImageText extends StatelessWidget {
       onTap: onTap,
       child: Column(
         children: [
-          UCircularContainer(
+          UCircularImage(
             height: 56,
             width: 56,
-            backgroundColor: backgroundColor ?? (dark ? UColors.dark : UColors.light),
-            padding: EdgeInsets.all(USizes.sm),
-            child: Image.asset(
-              image,
-              fit: BoxFit.cover, // Full image visible inside the circle
-            ),
-          ),
+            image: image,
+            isNetworkImage: true,),
+         
           SizedBox(height: USizes.spaceBtwItems / 2),
       
           SizedBox(
