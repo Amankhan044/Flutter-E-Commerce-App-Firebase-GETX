@@ -1,4 +1,5 @@
 import 'package:e_commerce/bindings/bindings.dart';
+import 'package:e_commerce/routes/app_routes.dart';
 import 'package:e_commerce/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
       theme: UAppTheme.lightTheme,
+      getPages: UAppRoutes.screens,
       darkTheme: UAppTheme.darkTheme,
       initialBinding: UBindings(),
       home: Scaffold(

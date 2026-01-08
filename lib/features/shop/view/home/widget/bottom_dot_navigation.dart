@@ -1,8 +1,9 @@
 import 'package:e_commerce/utils/helpers/device_helpers.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../../viewModel/banner/banner_view_model.dart';
 import '../../../viewModel/home/home_view_model.dart';
 
 class BottomDotNaigation extends StatelessWidget {
@@ -13,6 +14,8 @@ class BottomDotNaigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = HomeViewModel.instance;
+    final bannerController = Get.put(BannerViewModel());
+
 
 
     return Positioned(
@@ -23,7 +26,7 @@ class BottomDotNaigation extends StatelessWidget {
       child: Obx(
         () => SmoothPageIndicator(
           controller: PageController(initialPage: controller.currentIndex.value),
-          count: 5,
+          count: bannerController.banners.length,
           effect: const ExpandingDotsEffect(
             dotHeight: 6.0,
         
