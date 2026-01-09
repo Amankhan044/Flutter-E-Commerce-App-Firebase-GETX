@@ -10,8 +10,8 @@ class BannerViewModel extends GetxController{
 
 @override
   void onInit() {
-    fetchBanners();
     super.onInit();
+    fetchBanners();
 
   }
 

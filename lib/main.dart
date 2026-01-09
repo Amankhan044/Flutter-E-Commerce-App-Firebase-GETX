@@ -1,4 +1,6 @@
 import 'package:e_commerce/data/repository/authentication_repository.dart';
+import 'package:e_commerce/data/repository/banner/banner_repository.dart';
+import 'package:e_commerce/features/shop/viewModel/banner/banner_view_model.dart';
 import 'package:e_commerce/firebase_options.dart';
 import 'package:e_commerce/my_app.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,6 +20,10 @@ Future<void> main()async{
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   await GetStorage.init();
+
+    // Register controllers
+  Get.lazyPut(() => BannerRepository(), fenix: true);
+  Get.lazyPut(() => BannerViewModel(), fenix: true);
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform

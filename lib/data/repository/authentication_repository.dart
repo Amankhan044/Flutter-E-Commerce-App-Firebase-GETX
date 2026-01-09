@@ -1,4 +1,5 @@
 import 'package:e_commerce/data/repository/banner/banner_repository.dart';
+import 'package:e_commerce/data/repository/brand/brand_repository.dart';
 import 'package:e_commerce/data/repository/category/category_repository.dart';
 import 'package:e_commerce/data/repository/user/user_repository.dart';
 import 'package:e_commerce/features/authentication/view/onboarding/onboarding_view.dart';
@@ -34,6 +35,7 @@ class AuthenticationRepository  extends GetxController{
 
     FlutterNativeSplash.remove();
     screenRedirect();
+    // Get.put(BrandRepository()).uploadBrands(UDummyData.brands);
 
   }
 

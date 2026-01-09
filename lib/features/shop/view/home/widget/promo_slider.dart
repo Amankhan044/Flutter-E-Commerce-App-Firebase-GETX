@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce/common/widgets/shimmer/shimmer_effect.dart';
 import 'package:e_commerce/features/shop/view/home/widget/bottom_dot_navigation.dart' show BottomDotNaigation;
@@ -6,15 +7,13 @@ import 'package:e_commerce/features/shop/viewModel/home/home_view_model.dart';
 import 'package:e_commerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get_storage/get_storage.dart';
-
 import '../../../../../common/widgets/images/rounded_image.dart';
 
 class UPromoSlider extends StatelessWidget {
   const UPromoSlider({
     super.key, 
   });
+
 
 
   @override
@@ -35,15 +34,24 @@ if (bannerController.banners.isEmpty) {
 
         return Column(
         children: [
-          CarouselSlider(
-            
-            carouselController: controller.carouselController ,
-            options: CarouselOptions(viewportFraction: 1.0, onPageChanged: (index, reason) {
-              controller.onPaggedChanged(index);
-            },),
-            items:bannerController.banners.map((banner) => URoundedImage(imageUrl: banner.imageUrl, isNetworkImage: true,)).toList(),),
-            
-             
+          CarouselSlider.builder(
+  itemCount: bannerController.banners.length,
+  itemBuilder: (context, index, realIndex) {
+    final banner = bannerController.banners[index];
+    return CachedNetworkImage(
+      imageUrl: banner.imageUrl,
+      placeholder: (context, url) => UShimmerEffect(width: double.infinity, height: 190),
+      errorWidget: (context, url, error) => Icon(Icons.error),
+      fit: BoxFit.cover,
+    );
+  },
+  options: CarouselOptions(
+    viewportFraction: 1.0,
+    onPageChanged: (index, reason) => controller.onPaggedChanged(index),
+  ),
+  carouselController: controller.carouselController,
+)
+,
           
           const SizedBox(height: USizes.spaceBtwItems),
           BottomDotNaigation()
